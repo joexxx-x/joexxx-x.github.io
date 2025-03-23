@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popsoftlabs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+        }
+
+        @font-face {
+            font-family: 'SF Pro Text';
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        body {
+            background: #f8f9fa;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(200, 225, 210, 0.4) 0%, transparent 30%),
+                radial-gradient(circle at 80% 70%, rgba(200, 225, 210, 0.4) 0%, transparent 30%);
+            color: #333;
+            min-height: 100vh;
+            padding: 2rem;
+            overflow-x: hidden;
+        }
+
+        /* Glass morphism container */
+        .glass-container {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 12px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            margin-bottom: 3rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            color: #3d6647;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #3d6647;
+            position: relative;
+            padding: 0.5rem 0;
+            font-weight: 500;
+        }
+
+        nav a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background-color: #3d6647;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover:after {
+            width: 100%;
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            main {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #3d6647;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #3d6647;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: #3d6647;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(61, 102, 71, 0.2);
+            border: none;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .btn:hover {
+            background: #4a7854;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(61, 102, 71, 0.25);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .features {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .feature-card {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            color: #3d6647;
+        }
+
+        .contact {
+            margin-top: 3rem;
+        }
+
+        form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(200, 200, 200, 0.3);
+            color: #333;
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: #aaa;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: rgba(61, 102, 71, 0.5);
+            box-shadow: 0 0 0 2px rgba(61, 102, 71, 0.1);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            color: #777;
+        }
+
+        .accent-bg {
+            position: relative;
+        }
+
+        .accent-bg::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(61, 102, 71, 0.1);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .highlight {
+            color: #3d6647;
+            font-weight: 500;
+        }
+
+        .img-container {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Popsoftlabs</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="glass-container">
+            <h1>Crafting Tomorrow's Apps Today</h1>
+            <p>At Popsoftlabs, we're passionate about turning innovative ideas into beautiful, functional mobile and web applications. Our team of experienced developers and designers work together to create seamless user experiences that drive engagement and results.</p>
+            <p>We're a new startup with big ambitions. <span class="highlight">Stay tuned for our upcoming portfolio</span> of cutting-edge applications.</p>
+            <a href="#contact" class="btn">Get in Touch</a>
+        </section>
+
+        <section class="glass-container img-container">
+            <img src="/api/placeholder/500/300" alt="App development illustration" style="width: 100%; display: block;">
+        </section>
+    </main>
+
+    <section id="services" class="glass-container">
+        <h2 class="accent-bg">Our Services</h2>
+        <div class="features">
+            <div class="feature-card">
+                <h3>Mobile App Development</h3>
+                <p>Native and cross-platform applications for iOS and Android, built with the latest technologies for optimal performance.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Web Development</h3>
+                <p>Responsive, user-friendly web applications that deliver exceptional experiences across all devices.</p>
+            </div>
+            <div class="feature-card">
+                <h3>UI/UX Design</h3>
+                <p>Thoughtful, intuitive interfaces that enhance user engagement and satisfaction.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Consulting</h3>
+                <p>Expert guidance on technology choices, market strategy, and digital transformation.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="glass-container">
+        <h2 class="accent-bg">About Us</h2>
+        <p>Popsoftlabs was founded with a simple mission: to help businesses and entrepreneurs bring their app ideas to life. We combine technical expertise with creative thinking to develop solutions that stand out in today's competitive digital landscape.</p>
+        <p>While we're just getting started, our team brings years of experience from leading tech companies. We're excited to partner with forward-thinking clients who want to make an impact.</p>
+    </section>
+
+    <section id="contact" class="glass-container contact">
+        <h2 class="accent-bg">Contact Us</h2>
+        <p>Interested in working together? Fill out the form below, and we'll get back to you shortly.</p>
+        <form id="contactForm" onsubmit="return openMailto(event)">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea rows="4" name="message" placeholder="Tell us about your project" required></textarea>
+            <button type="submit" class="btn">Send Message</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Popsoftlabs. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function openMailto(event) {
+            event.preventDefault();
+            
+            // Get the form elements
+            const form = document.getElementById('contactForm');
+            const name = form.elements.name.value;
+            const email = form.elements.email.value;
+            const message = form.elements.message.value;
+            
+            // Construct the mailto URL
+            const recipient = "info@popsoftlabs.com";
+            const subject = "Contact Form: " + name;
+            const body = "Name: " + name + "\nEmail: " + email + "\n\nMessage:\n" + message;
+            
+            // Encode the parameters
+            const mailtoUrl = "mailto:" + recipient + 
+                             "?subject=" + encodeURIComponent(subject) + 
+                             "&body=" + encodeURIComponent(body);
+            
+            // Open the email client
+            window.location.href = mailtoUrl;
+            
+            return false; // Prevent form submission
+        }
+    </script>
+</body>
+</html>
